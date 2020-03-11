@@ -127,7 +127,7 @@ export default class FloatingButton extends Component {
         .then(({ uri }) => {
           MediaLibrary.saveToLibraryAsync(uri);
           // console.log(uri);
-           Alert.alert('Saved')
+          Alert.alert("Saved");
         })
         .catch(error => {
           console.error(error);
@@ -138,20 +138,19 @@ export default class FloatingButton extends Component {
       <View style={(styles.container, this.props.style)}>
         <TouchableWithoutFeedback
           // onPress={() => downloadImage(param.url_l)}
-          onPress={() => downloadImage(this.props.url_l)}
-         
+          onPress={() => downloadImage(this.props.url_z)}
           accessible={true}
         >
           <Animated.View style={[styles.button, styles.secondary, hearStyle]}>
             {/* <Ionicons name="md-download" size={24} color="#F02A4B" /> */}
-            <Text style={{ fontSize: 9,color:'white' }}>1080x1920</Text>
+            <Text style={{ fontSize: 9, color: "white" }}>1080x1920</Text>
             {/* <Text style={{ color: "red", fontSize: 11 }}>{param.first}</Text> */}
           </Animated.View>
         </TouchableWithoutFeedback>
 
         <TouchableWithoutFeedback
           // onPress={() => alert(param.url_z)}
-          onPress={() => downloadImage(this.props.url_l)}
+          onPress={() => downloadImage(this.props.url_c)}
           accessible={true}
         >
           <Animated.View style={[styles.button, styles.secondary, thumbStyle]}>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Image,
@@ -35,6 +35,13 @@ export default function DetailsScreen({ navigation, route }) {
   var second = height_z + "x" + width_z;
   var third = height_m + "x" + width_m;
 
+  const { mang } = route.params;
+  const { position } = route.params;
+  const [vitri, setVitri] = useState(position);
+  onPageScroll = event => {
+    setVitri(event.nativeEvent.position);
+  };
+
   let param = {
     first: { first },
     url_l: { url_l },
@@ -49,11 +56,24 @@ export default function DetailsScreen({ navigation, route }) {
     <View style={styles.container}>
       {/* <Text style={{ color: "white" }}>{JSON.stringify(height_l)}</Text> */}
 
-      <ViewPager style={styles.viewPager} initialPage={0}>
-        <View style={styles.page} key="1">
-          <Image style={styles.image} source={{ uri: url_l }} />
-        </View>
-        <View style={styles.page} key="2">
+      <ViewPager
+        style={styles.viewPager}
+        initialPage={position}
+        onPageScroll={event => onPageScroll(event)}
+      >
+        {mang.map((values, index) => {
+          return (
+            <View key={index}>
+              <Image style={styles.image} source={{ uri: values.url_c }} />
+            </View>
+          );
+        })}
+        {/* <View style={styles.page} key="1"> */}
+        {/* <View key={index}>
+          <Image style={styles.image} source={{ uri: values.url_l }} />
+        </View> */}
+        {/* </View> */}
+        {/* <View style={styles.page} key="2">
           <Image
             style={{ width: 400, height: 250 }}
             source={{
@@ -88,18 +108,21 @@ export default function DetailsScreen({ navigation, route }) {
                 "https://live.staticflickr.com/5213/5538932857_458bdf3ee3_b.jpg"
             }}
           />
-        </View>
+        </View> */}
       </ViewPager>
 
       <View style={styles.fab}>
         {/* <FloatingButton {...param} /> */}
         <FloatingButton
           first={first}
-          url_l={url_l}
-          second={second}
-          url_z={url_z}
-          third={third}
-          url_m={url_m}
+          // url_l={url_l}
+          // second={second}
+          // url_z={url_z}
+          // third={third}
+          // url_m={url_m}
+          url_z={mang[vitri].url_z}
+          url_c={mang[vitri].url_c}
+          url_l={mang[vitri].url_l}
         />
       </View>
     </View>
@@ -109,7 +132,7 @@ export default function DetailsScreen({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: "black"
     // alignItems: "center",
     // justifyContent: "center"
   },

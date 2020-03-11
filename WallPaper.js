@@ -9,6 +9,8 @@ import {
   Image,
   StatusBar
 } from "react-native";
+
+
 import Icon from "react-native-vector-icons/FontAwesome";
 import {
   AntDesign,
@@ -34,8 +36,8 @@ export default function WallPaper({ navigation }) {
       body: new URLSearchParams({
         api_key: "561ba0b1f9a7d1b42c8b4e14656bc011",
         user_id: "187062262@N04",
-        extras:
-          "id, title, date_faved, views, media, path_alias, url_sq, url_t, url_c, url_l, url_o",
+        // extras:"id, title, date_faved, views, media, path_alias, url_sq, url_t, url_c, url_l, url_o",
+        extras:'id, title, date_faved, views, media, path_alias, url_sq, url_z, url_c, url_l, url_o',
         format: "json",
         method: "flickr.favorites.getList",
         nojsoncallback: "1",
@@ -98,7 +100,7 @@ export default function WallPaper({ navigation }) {
       });
   };
 
-  const [mang, setMang] = useState();
+  const [mang, setMang] = useState([]);
   return (
     <View style={styles.container}>
       <FlatList
@@ -111,19 +113,22 @@ export default function WallPaper({ navigation }) {
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate("DetailsScreen", {
-                  url_l: item.url_l,
-                  height_l: item.height_l,
-                  width_l: item.width_l,
-                  url_z: item.url_z,
-                  height_z: item.height_z,
-                  width_z: item.width_z,
-                  url_m: item.url_m,
-                  height_m: item.height_m,
-                  width_m: item.width_m
+                  // url_l: item.url_l,
+                  // height_l: item.height_l,
+                  // width_l: item.width_l,
+                  // url_z: item.url_z,
+                  // height_z: item.height_z,
+                  // width_z: item.width_z,
+                  // url_m: item.url_m,
+                  // height_m: item.height_m,
+                  // width_m: item.width_m
+                  mang,
+                  position: index
                 });
               }}
             >
               <Image
+              
                 style={{
                   borderRadius: 5,
                   width: 195,
